@@ -9,8 +9,8 @@
   "scripts": {
     "check": "node .agents/harness/cli.mjs check",
     "sync": "node .agents/harness/cli.mjs sync",
-    "test": "node --test \"tests/*.test.mjs\"",
+    "test": "node --test",
     "eval": "node .agents/harness/cli.mjs eval policy",
-    "verify": "node .agents/harness/cli.mjs check && node --test \"tests/*.test.mjs\" && node .agents/harness/cli.mjs eval policy"
+    "verify": "node .agents/harness/cli.mjs check && node --test && node .agents/harness/cli.mjs eval policy"
   }
 }

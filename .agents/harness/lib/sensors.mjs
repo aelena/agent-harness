@@ -3,18 +3,27 @@
 
 import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
-import { mkdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, realpathSync, statSync, writeFileSync } from 'node:fs';
 import { isAbsolute, join } from 'node:path';
 import { matchAny, matchPath } from './glob.mjs';
 import { rel, tail, walk } from './util.mjs';
+
+const real = (p) => {
+  try {
+    return realpathSync(p);
+  } catch {
+    return p;
+  }
+};
 
 const SAFE_PATH = /^[\w .\/\\:@()+,=~-]+$/;
 
 export function runSensors(root, sensors, paths) {
   const failures = [];
   for (const p of paths) {
-    const abs = isAbsolute(p) ? p : join(root, p);
-    const file = rel(root, abs);
+    // Compare real paths: the agent may name the file through a symlink (macOS /var -> /private/var).
+    const abs = real(isAbsolute(p) ? p : join(root, p));
+    const file = rel(real(root), abs);
     if (file.startsWith('..') || !SAFE_PATH.test(file)) continue;
     for (const s of sensors) {
       if (!matchPath(file, s.match)) continue;

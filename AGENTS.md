@@ -7,7 +7,7 @@ A portable harness for coding agents: shared skills and subagents, one guard pol
 ```bash
 npm run verify    # check + tests + policy evals. Must pass before any work is called done.
 npm run check     # lint the harness: skills, docs, links, config, generated files
-npm test          # node --test "tests/*.test.mjs"
+npm test          # node --test (finds tests/*.test.mjs)
 npm run sync      # regenerate every agent's wiring after changing .agents/ or this file
 ```
 
