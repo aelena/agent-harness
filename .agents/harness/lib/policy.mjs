@@ -186,7 +186,10 @@ function checkCommand(cmd, policy) {
   if (READERS.has(name)) {
     // For copy-like commands only the sources are read: `cp .env.example .env` is fine.
     const copyLike = ['cp', 'copy-item', 'copy', 'rsync', 'scp'].includes(name) && positional.length > 1;
-    const read = copyLike ? args.filter((a) => a !== positional[positional.length - 1]) : args;
+    // For search and filter commands the first operand is a pattern or a script, not a file.
+    const patternFirst = ['grep', 'egrep', 'fgrep', 'rg', 'ag', 'sed', 'awk', 'jq', 'yq', 'select-string', 'sls'].includes(name);
+    const skip = copyLike ? positional[positional.length - 1] : patternFirst ? positional[0] : undefined;
+    const read = skip === undefined ? args : args.filter((a, i) => i !== args.indexOf(skip));
     const found = fileArgs(read).find((a) => isSecretPath(a, policy));
     if (found) hit('secret-file', found);
   }

@@ -60,7 +60,7 @@ A test asks "does the code do what the code says?". An eval asks "does the harne
 {"kind":"shell","command":"git commit -m \"docs: explain --no-verify policy\"","expect":"allow","why":"the flag is inside the message"}
 ```
 
-`npm run eval` runs them against the policy *as configured for your project*, so they also tell you what your overrides changed. Ninety cases ship. About a third are near-misses: commands that look dangerous and are not. Those are the cases that stop a guard from becoming a nuisance.
+`npm run eval` runs them against the policy *as configured for your project*, so they also tell you what your overrides changed. Ninety-three cases ship. About a third are near-misses: commands that look dangerous and are not. Those are the cases that stop a guard from becoming a nuisance.
 
 Whenever the guard gets something wrong in real use, in either direction, the fix starts with a new line in this file.
 

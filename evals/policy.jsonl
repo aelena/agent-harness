@@ -88,3 +88,6 @@
 {"kind":"write","paths":["/repo/.claude/settings.json"],"expect":"ask","rule":"protected-path"}
 {"kind":"write","paths":["/repo/src/index.ts"],"expect":"allow"}
 {"kind":"read","paths":["/repo/package-lock.json"],"expect":"allow","why":"protected paths restrict writes only"}
+{"kind":"shell","command":"git ls-files | grep -iE \"\\.env|secret|\\.pem\"","expect":"allow","why":"the first operand of grep is a pattern, not a file"}
+{"kind":"shell","command":"grep API_KEY .env","expect":"deny","rule":"secret-file"}
+{"kind":"shell","command":"rg -n \"id_rsa\" docs/","expect":"allow","why":"searching for the name of a key file is not reading one"}

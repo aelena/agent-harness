@@ -48,7 +48,7 @@ npx skills add aelena/agent-harness                 # the skills only, any agent
 | Dialects | [`lib/dialects.mjs`](.agents/harness/lib/dialects.mjs) | Each agent's hook payload and reply format, in one file. |
 | Tooling | [`cli.mjs`](.agents/harness/cli.mjs) | `check`, `sync`, `eval`, `install`, `new-skill`. |
 | Conventions | [`docs/conventions/`](docs/conventions) | This repository's rules. Each states how it is enforced. |
-| Evals | [`evals/`](evals) | 90 guard scenarios, and trigger cases for every skill the model may invoke. |
+| Evals | [`evals/`](evals) | 93 guard scenarios, and trigger cases for every skill the model may invoke. |
 | Tutorial | [`docs/tutorial/`](docs/tutorial/README.md) | Ten chapters: how a harness works and how to build one. |
 
 ## Skills

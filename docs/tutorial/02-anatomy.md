@@ -137,7 +137,7 @@ This harness began as a study of [CodelyTV/agent-harness](https://github.com/Cod
 
 | Area | Upstream | Here |
 | --- | --- | --- |
-| Guard | Blocks any command containing `export`: four separate implementations with different regexes. Stops `npm run export`, lets `env` and `cat .env` through. | One policy that parses commands. Nine rules, each with a remedy in its message, configurable per project, 90 recorded scenarios. |
+| Guard | Blocks any command containing `export`: four separate implementations with different regexes. Stops `npm run export`, lets `env` and `cat .env` through. | One policy that parses commands. Nine rules, each with a remedy in its message, configurable per project, 93 recorded scenarios. |
 | Agent wiring | Six bash scripts that create symlinks. Broken on Windows without extra setup. | One `sync` in Node that generates each agent's config. Only Claude Code still needs a skills link, and it falls back to a copy. |
 | Feedback | None. | Post-edit sensors and a stop gate that runs your verification command. |
 | Skills | Ten, with four copies of one guideline file and two identical descriptions. | Nine. One planning skill and one implement skill cover files, GitHub and GitLab through on-demand resources. New: research, fresh review, session handoff, harness audit. |
