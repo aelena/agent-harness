@@ -1,0 +1,44 @@
+{
+  "name": "agent-harness",
+  "description": "A portable harness for coding agents.",
+  "owner": { "name": "agent-harness contributors" },
+  "plugins": [
+    {
+      "name": "agent-harness",
+      "source": "./",
+      "description": "Workflow skills, read-only subagents and the guard policy.",
+      "category": "engineering"
+    },
+    {
+      "name": "controlled-english",
+      "source": "./plugins/controlled-english",
+      "description": "Output style: short, literal, active-voice answers that are easy to scan and to translate.",
+      "version": "1.0.0",
+      "category": "productivity"
+    },
+    {
+      "name": "ts7-lsp",
+      "source": "./plugins/ts7-lsp",
+      "description": "TypeScript and JavaScript code intelligence through the LSP server built into the TypeScript 7 native compiler.",
+      "version": "1.0.0",
+      "category": "development",
+      "strict": false,
+      "lspServers": {
+        "ts7": {
+          "command": "tsc",
+          "args": ["--lsp", "-stdio"],
+          "extensionToLanguage": {
+            ".ts": "typescript",
+            ".tsx": "typescriptreact",
+            ".mts": "typescript",
+            ".cts": "typescript",
+            ".js": "javascript",
+            ".jsx": "javascriptreact",
+            ".mjs": "javascript",
+            ".cjs": "javascript"
+          }
+        }
+      }
+    }
+  ]
+}

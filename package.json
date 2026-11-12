@@ -1,0 +1,16 @@
+{
+  "name": "agent-harness",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A portable, tested harness for coding agents: skills, guard policy, feedback sensors and the tooling that keeps them consistent.",
+  "type": "module",
+  "license": "MIT",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "check": "node .agents/harness/cli.mjs check",
+    "sync": "node .agents/harness/cli.mjs sync",
+    "test": "node --test \"tests/*.test.mjs\"",
+    "eval": "node .agents/harness/cli.mjs eval policy",
+    "verify": "node .agents/harness/cli.mjs check && node --test \"tests/*.test.mjs\" && node .agents/harness/cli.mjs eval policy"
+  }
+}

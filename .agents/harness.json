@@ -1,0 +1,24 @@
+{
+  "agents": ["claude", "cursor", "copilot", "codex", "gemini", "opencode"],
+  "sync": { "mode": "auto" },
+  "groups": {
+    "workflow": { "title": "Workflow", "description": "Research, plan, implement and review, one reviewable step at a time." },
+    "harness": { "title": "Harness", "description": "Skills that maintain the harness itself." },
+    "git": { "title": "Git", "description": "Git operations that follow the team conventions." },
+    "specs": { "title": "Specs", "description": "Working with OpenSpec." }
+  },
+  "sensors": {
+    "postEdit": [
+      { "name": "harness check", "match": ".agents/skills/**", "run": "node .agents/harness/cli.mjs check --for {file}" },
+      { "name": "harness check", "match": ".agents/agents/**", "run": "node .agents/harness/cli.mjs check --for {file}" },
+      { "name": "harness check", "match": "docs/**/*.md", "run": "node .agents/harness/cli.mjs check --for {file}" },
+      { "name": "syntax", "match": "**/*.mjs", "run": "node --check {file}" }
+    ],
+    "verify": "npm run --silent verify",
+    "verifyTimeoutSec": 120,
+    "maxStopBlocks": 3
+  },
+  "policy": {
+    "rules": {}
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "hooks": {
+    "beforeShellExecution": [
+      {
+        "command": "node .agents/harness/hooks/guard.mjs --agent cursor",
+        "timeout": 10
+      }
+    ],
+    "beforeReadFile": [
+      {
+        "command": "node .agents/harness/hooks/guard.mjs --agent cursor",
+        "timeout": 10
+      }
+    ],
+    "preToolUse": [
+      {
+        "command": "node .agents/harness/hooks/guard.mjs --agent cursor",
+        "matcher": "Write|Delete",
+        "timeout": 10
+      }
+    ],
+    "sessionStart": [
+      {
+        "command": "node .agents/harness/hooks/session-start.mjs --agent cursor",
+        "timeout": 20
+      }
+    ],
+    "postToolUse": [
+      {
+        "command": "node .agents/harness/hooks/feedback.mjs --agent cursor",
+        "matcher": "Write",
+        "timeout": 90
+      }
+    ],
+    "stop": [
+      {
+        "command": "node .agents/harness/hooks/stop-gate.mjs --agent cursor",
+        "timeout": 150,
+        "loop_limit": 3
+      }
+    ]
+  }
+}

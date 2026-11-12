@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "hooks": {
+    "preToolUse": [
+      {
+        "type": "command",
+        "command": "node .agents/harness/hooks/guard.mjs --agent copilot",
+        "timeoutSec": 10
+      }
+    ],
+    "sessionStart": [
+      {
+        "type": "command",
+        "command": "node .agents/harness/hooks/session-start.mjs --agent copilot",
+        "timeoutSec": 20
+      }
+    ],
+    "postToolUse": [
+      {
+        "type": "command",
+        "command": "node .agents/harness/hooks/feedback.mjs --agent copilot",
+        "timeoutSec": 90
+      }
+    ],
+    "agentStop": [
+      {
+        "type": "command",
+        "command": "node .agents/harness/hooks/stop-gate.mjs --agent copilot",
+        "timeoutSec": 150
+      }
+    ]
+  }
+}

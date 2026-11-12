@@ -1,0 +1,15 @@
+{"prompt":"commit these changes","expect":"git-commit"}
+{"prompt":"looks good, commit with message 2","expect":"git-commit"}
+{"prompt":"what did the last three commits change?","expect":null,"not":["git-commit"]}
+{"prompt":"I've finished phase 1, can you get a second opinion on the diff before I commit?","expect":"fresh-review"}
+{"prompt":"review my uncommitted changes against the plan with fresh eyes","expect":"fresh-review"}
+{"prompt":"explain what this function does","expect":null,"not":["fresh-review"]}
+{"prompt":"that's the second time I've told you: we never use default exports here. make it stick.","expect":"convention-capture"}
+{"prompt":"document our convention that database tables are named in the plural","expect":"convention-capture"}
+{"prompt":"rename this table to the plural form","expect":null,"not":["convention-capture"]}
+{"prompt":"I'm stopping for today, save where we are so I can pick this up tomorrow","expect":"session-handoff"}
+{"prompt":"this conversation is getting long, write a handoff before I clear context","expect":"session-handoff"}
+{"prompt":"summarize what this repository does","expect":null,"not":["session-handoff"]}
+{"prompt":"agents keep making the same mistakes in this repo, can you check how well it is set up for them?","expect":"harness-audit"}
+{"prompt":"review our AGENTS.md and agent setup and tell me what to fix first","expect":"harness-audit"}
+{"prompt":"audit this package for security vulnerabilities","expect":null,"not":["harness-audit"]}

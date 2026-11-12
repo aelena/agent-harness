@@ -1,0 +1,12 @@
+node_modules/
+
+# agent-harness: local state and generated folders (rebuilt by `harness sync`)
+.agents/.state/
+.agents/handoff.md
+.claude/skills
+.claude/agents
+.claude/settings.local.json
+
+# local tooling
+graft/
+.ignore

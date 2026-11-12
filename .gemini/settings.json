@@ -1,0 +1,60 @@
+{
+  "context": {
+    "fileName": [
+      "AGENTS.md",
+      "GEMINI.md"
+    ]
+  },
+  "hooks": {
+    "BeforeTool": [
+      {
+        "matcher": "run_shell_command|read_file|read_many_files|write_file|replace",
+        "hooks": [
+          {
+            "name": "harness-guard",
+            "type": "command",
+            "command": "node .agents/harness/hooks/guard.mjs --agent gemini",
+            "timeout": 10000
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "name": "harness-session-start",
+            "type": "command",
+            "command": "node .agents/harness/hooks/session-start.mjs --agent gemini",
+            "timeout": 20000
+          }
+        ]
+      }
+    ],
+    "AfterTool": [
+      {
+        "matcher": "write_file|replace",
+        "hooks": [
+          {
+            "name": "harness-feedback",
+            "type": "command",
+            "command": "node .agents/harness/hooks/feedback.mjs --agent gemini",
+            "timeout": 90000
+          }
+        ]
+      }
+    ],
+    "AfterAgent": [
+      {
+        "hooks": [
+          {
+            "name": "harness-stop-gate",
+            "type": "command",
+            "command": "node .agents/harness/hooks/stop-gate.mjs --agent gemini",
+            "timeout": 150000
+          }
+        ]
+      }
+    ]
+  }
+}

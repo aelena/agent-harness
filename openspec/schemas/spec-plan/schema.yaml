@@ -1,0 +1,40 @@
+name: spec-plan
+version: 1
+description: Lean specs, then a single plan.md that is also the task list
+artifacts:
+  - id: specs
+    generates: "specs/**/*.md"
+    description: Lean behaviour specs, one per capability
+    template: spec.md
+    instruction: |
+      Observable behaviour only: no class names, libraries or implementation steps.
+
+      - Reuse the capability paths listed by `openspec list --specs`. Name a new one after a durable behaviour (`order-cancellation`, not `add-cancel-button`).
+      - One behaviour per requirement. Add scenarios only for distinct edge cases.
+      - MODIFIED copies the whole existing requirement and keeps every scenario.
+    requires: []
+
+  - id: plan
+    generates: plan.md
+    description: Goal, decisions and vertical-slice phases with the contracts, tests and tasks that implement the specs
+    template: plan.md
+    instruction: |
+      Plan how to implement the specs. Keep it short: it is reviewed together with the specs.
+
+      - Decisions: choices and assumptions the request did not state, one line each, naming the discarded alternative when it is not obvious. End with what is out of scope.
+      - Phases: one phase per part of the change that is worth having on its own, even if the rest were never built. Parts that are only valuable together form one phase. Each phase is a vertical slice through every layer it needs (API contract, UI, logic, persistence) that builds, passes verification alone, and never leaves the system in a wrong business state.
+      - Contracts: public signatures only, in the language each is written in, grouped by type (API endpoints and payloads, application services, ports and repositories, domain events, database schemas, UI copy). Omit types without changes.
+      - Tests: the test strategy of the phase, proving its behaviour with as few tests as possible. One acceptance test per user goal through the public API or UI, and unit tests of the application service for the rules, with cases chosen by equivalence classes and boundary values. Never prove the same behaviour twice at different levels. List each suite with the behaviours it covers, not every test case.
+      - Tasks: name the existing code to copy the pattern from in the task that needs it.
+      - Each phase ends with the verification task of the template.
+      - Only phase tasks are checkboxes: every `- [ ]` in this file counts as a task.
+    requires:
+      - specs
+
+apply:
+  requires: [plan]
+  tracks: plan.md
+  instruction: |
+    Implement only the first phase that has unchecked tasks, and check off each task as you finish it.
+    When the phase's verification task passes, add or update `implemented_by` (same shape as `created_by`) and `last_implemented_at` in the frontmatter, and rewrite the Next step.
+    Then commit the phase as one conventional commit, plan.md included, and stop. The next phase starts only when the user runs apply again.

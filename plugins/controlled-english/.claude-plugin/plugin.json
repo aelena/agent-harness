@@ -1,0 +1,7 @@
+{
+  "name": "controlled-english",
+  "description": "Output style: short, literal, active-voice answers that are easy to scan and to translate.",
+  "version": "1.0.0",
+  "license": "MIT",
+  "keywords": ["output-style", "writing", "simplified-technical-english"]
+}
